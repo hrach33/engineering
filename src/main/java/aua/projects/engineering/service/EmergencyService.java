@@ -8,6 +8,7 @@ import java.util.List;
 public interface EmergencyService {
     List<UserDto> getAllUsers();
     UserDto getUserById(long id);
+    UserDto getUserByUsername(String username);
     void insertUser(UserDto userDto);
     void updateUser(UserDto userDto);
 
@@ -15,4 +16,5 @@ public interface EmergencyService {
     TeamDto getTeamById(long id);
     void insertTeam(TeamDto teamDto);
     void updateTeam(TeamDto teamDto);
+    boolean checkUsernameTaken(String username);
 }
