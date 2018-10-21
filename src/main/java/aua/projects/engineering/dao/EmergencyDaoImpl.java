@@ -1,7 +1,9 @@
 package aua.projects.engineering.dao;
 
+import aua.projects.engineering.dto.TaskDto;
 import aua.projects.engineering.dto.TeamDto;
 import aua.projects.engineering.dto.UserDto;
+import aua.projects.engineering.dto.mapper.TaskDtoMapper;
 import aua.projects.engineering.dto.mapper.UserDtoMapper;
 import aua.projects.engineering.dto.mapper.TeamDtoMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -115,4 +117,48 @@ public class EmergencyDaoImpl extends BaseDao implements EmergencyDao {
     }
 
 
+    private static final String GET_ALL_TASKS = "select * from task";
+    @Override
+    public List<TaskDto> getAllTasks() {
+        return this.getJdbcTemplate().query(GET_ALL_TASKS, new TaskDtoMapper());
+    }
+
+
+
+    private static final String GET_TASK_BY_ID = "select * from task where id = ? ";
+    @Override
+    public TaskDto getTaskById(long id) {
+        try {
+            return this.getJdbcTemplate().queryForObject(GET_TASK_BY_ID, new Object[]{id}, new TaskDtoMapper());
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+
+    private static final String INSERT_TASK = "insert into task "+
+            "(type, destination, description, status, level)" +
+            " VALUES (?,?,?,?,?)";
+    @Override
+    public void insertTask(TaskDto taskDto) {
+        this.getJdbcTemplate().update(INSERT_TASK, new Object[]{ taskDto.getType(),
+                taskDto.getDestination(),
+                taskDto.getDescription(),
+                taskDto.getStatus(),
+                taskDto.getLevel()});
+    }
+
+
+
+    private static final String UPDATE_TASK = "update task set" +
+            "(type, destination, description, status, level) " +
+            " VALUES (?,?,?,?,?) where id = ? ";
+    @Override
+    public void updateTask(TaskDto taskDto) {
+        this.getJdbcTemplate().update(UPDATE_TASK, new Object[]{taskDto.getType(),
+                taskDto.getDestination(),
+                taskDto.getDescription(),
+                taskDto.getStatus(),
+                taskDto.getLevel()});
+    }
 }

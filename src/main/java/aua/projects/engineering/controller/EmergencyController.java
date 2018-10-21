@@ -1,6 +1,7 @@
 package aua.projects.engineering.controller;
 
 import aua.projects.engineering.beans.response.ResponseResult;
+import aua.projects.engineering.dto.TaskDto;
 import aua.projects.engineering.dto.UserDto;
 import aua.projects.engineering.dto.TeamDto;
 import aua.projects.engineering.service.EmergencyService;
@@ -119,5 +120,51 @@ public class EmergencyController {
         }
     }
 
+
+
+
+    @GetMapping("/getAllTasks")
+    ResponseResult getAllTasks(){
+        try {
+            List<TaskDto> taskDtos = emergencyService.getAllTasks();
+            return ResponseResult.ok(taskDtos);
+        }catch (Throwable t){
+            LOG.error("Get all tasks failed. ", t);
+            return ResponseResult.error();
+        }
+    }
+
+    @GetMapping("/getTaskById/{id}")
+    ResponseResult getTaskById(@PathVariable("id") Long id){
+        try {
+            TaskDto taskDto = emergencyService.getTaskById(id);
+            return ResponseResult.ok(taskDto);
+        }catch (Throwable t){
+            LOG.error("Get task by id failed. ", t);
+            return ResponseResult.error();
+        }
+    }
+
+    @PostMapping("/insertTask")
+    ResponseResult inserTask(@RequestBody TaskDto taskDto){
+        try {
+            emergencyService.insertTask(taskDto);
+            return ResponseResult.ok();
+        }catch (Throwable t){
+            LOG.error("Insert task failed. ", t);
+            return ResponseResult.error();
+        }
+    }
+
+    @PostMapping("/updateTask")
+    ResponseResult updateTask(@RequestBody TaskDto taskDto) {
+        try {
+            emergencyService.updateTask(taskDto);
+            return ResponseResult.ok();
+        } catch (Throwable t) {
+            LOG.error("update task failed. ", t);
+            return ResponseResult.error();
+        }
+    }
 
 }

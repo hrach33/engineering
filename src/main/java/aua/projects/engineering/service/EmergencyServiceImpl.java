@@ -1,6 +1,7 @@
 package aua.projects.engineering.service;
 
 import aua.projects.engineering.dao.EmergencyDao;
+import aua.projects.engineering.dto.TaskDto;
 import aua.projects.engineering.dto.TeamDto;
 import aua.projects.engineering.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,17 @@ public class EmergencyServiceImpl implements EmergencyService {
     public void updateTeam(TeamDto teamDto) { emergencyDao.updateTeam(teamDto);}
 
     @Override
-    public boolean checkUsernameTaken(String username) { return getUserByUsername(username) != null;}
+    public List<TaskDto> getAllTasks() { return emergencyDao.getAllTasks();}
 
+    @Override
+    public TaskDto getTaskById(long id) { return emergencyDao.getTaskById(id);}
+
+    @Override
+    public void insertTask(TaskDto taskDto) { emergencyDao.insertTask(taskDto); }
+
+    @Override
+    public void updateTask(TaskDto taskDto) { emergencyDao.updateTask(taskDto);}
+
+    @Override
+    public boolean checkUsernameTaken(String username) { return getUserByUsername(username) != null;}
 }

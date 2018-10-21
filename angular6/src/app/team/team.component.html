@@ -1,3 +1,22 @@
 <p>
   team works!
 </p>
+<dx-data-grid style="width: 1000px; margin-left: -300px;"
+              id="reports"
+              [dataSource]="teams"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [allowColumnResizing]="true"
+              [hoverStateEnabled]="true"
+              [allowColumnReordering]="true"
+              [columnResizingMode]="'nextColumn'"
+              [columnMinWidth]="50"
+              [wordWrapEnabled]="false">
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxi-column dataField="name" caption="Name"></dxi-column>
+  <dxi-column dataField="speciality" caption="Speciality"></dxi-column>
+  <dxi-column dataField="capacity" caption="Capacity"></dxi-column>
+  <dxi-column dataField="leaderId" caption="LeaderId"></dxi-column>
+  <dxi-column dataField="status" caption="Status"></dxi-column>
+</dx-data-grid>

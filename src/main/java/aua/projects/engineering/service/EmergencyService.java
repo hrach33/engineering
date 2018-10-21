@@ -1,5 +1,6 @@
 package aua.projects.engineering.service;
 
+import aua.projects.engineering.dto.TaskDto;
 import aua.projects.engineering.dto.TeamDto;
 import aua.projects.engineering.dto.UserDto;
 
@@ -17,4 +18,9 @@ public interface EmergencyService {
     void insertTeam(TeamDto teamDto);
     void updateTeam(TeamDto teamDto);
     boolean checkUsernameTaken(String username);
+
+    List<TaskDto> getAllTasks();
+    TaskDto getTaskById(long id);
+    void insertTask(TaskDto taskDto);
+    void updateTask(TaskDto taskDto);
 }

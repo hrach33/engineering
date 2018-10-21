@@ -17,5 +17,4 @@ export class UserComponent implements OnInit {
       console.log(err);
     })
   }
-
 }

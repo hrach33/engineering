@@ -1,7 +1,6 @@
 package aua.projects.engineering.dto.mapper;
 
 import aua.projects.engineering.dto.TeamDto;
-import aua.projects.engineering.dto.UserDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

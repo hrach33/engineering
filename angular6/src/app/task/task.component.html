@@ -1,3 +1,23 @@
 <p>
   task works!
 </p>
+<dx-data-grid style="width: 1000px; margin-left: -300px;"
+              id="reports"
+              [dataSource]="tasks"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [allowColumnResizing]="true"
+              [hoverStateEnabled]="true"
+              [allowColumnReordering]="true"
+              [columnResizingMode]="'nextColumn'"
+              [columnMinWidth]="50"
+              [wordWrapEnabled]="false">
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxi-column dataField="type" caption="Type"></dxi-column>
+  <dxi-column dataField="destination" caption="Destination"></dxi-column>
+  <dxi-column dataField="description" caption="Description"></dxi-column>
+  <dxi-column dataField="speciality" caption="Speciality"></dxi-column>
+  <dxi-column dataField="status" caption="Status"></dxi-column>
+  <dxi-column dataField="level" caption="Level"></dxi-column>
+</dx-data-grid>
