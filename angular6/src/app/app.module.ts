@@ -18,23 +18,25 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import {UserComponent} from "./user/user.component";
 import {DxDataGridModule} from "devextreme-angular";
-
-;
+import { TaskComponent } from './task/task.component';
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-      DxDataGridModule,
+        DxDataGridModule,
         routing
     ],
-    declarations: [
+  declarations: [
         AppComponent,
         AlertComponent,
         HomeComponent,
         LoginComponent,
         RegisterComponent,
+        TeamComponent,
+        TaskComponent,
         UserComponent],
     providers: [
         AuthGuard,

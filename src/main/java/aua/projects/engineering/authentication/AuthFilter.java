@@ -33,7 +33,7 @@ public class AuthFilter implements Filter {
             if(verified){
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
-                httpServletResponse.sendError(403);
+                httpServletResponse.sendError(401);
             }
         }
     }
