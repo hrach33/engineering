@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ResponseStatus {
     SUCCESS("0"),
     GENERAL_ERROR("1"),
-    INCORRECT_REQUEST_PARAMETERS("2");
+    INCORRECT_REQUEST_PARAMETERS("2"),
+    AUTHENTICATION_FAILED("3");
 
     private final String value;
 
