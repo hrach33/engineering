@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/emergency")
 public class EmergencyController {
 

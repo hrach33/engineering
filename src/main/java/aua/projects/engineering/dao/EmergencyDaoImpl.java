@@ -29,7 +29,7 @@ public class EmergencyDaoImpl extends BaseDao implements EmergencyDao {
         }
     }
 
-    private static final String GET_USER_BY_USERNAME = "select * from user where userName = ? ";
+    private static final String GET_USER_BY_USERNAME = "select * from user where user_name = ? ";
     @Override
     public UserDto getUserByUsername(String username) {
         try {

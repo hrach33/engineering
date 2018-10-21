@@ -9,14 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -36,8 +34,7 @@ public class AuthController {
         try {
             boolean authenticated = authProvider.checkUserCredentials(loginRequest.username, loginRequest.password);
             if(authenticated){
-                response.addHeader(HttpHeaders.AUTHORIZATION, authProvider.createToken(loginRequest.username));
-                return ResponseResult.ok();
+                return ResponseResult.ok(authProvider.createToken(loginRequest.username));
             }
             return ResponseResult.error(ResponseStatus.AUTHENTICATION_FAILED);
         }catch (Throwable t){

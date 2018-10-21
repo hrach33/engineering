@@ -1,10 +1,10 @@
-﻿<h1>Hi {{currentUser.firstName}}!</h1>
-<p>You're logged in with Angular 6!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
-<p><a [routerLink]="['/login']">Logout</a></p>
+﻿<p>Current user: {{currentUser.username}}</p>
+<div class="text-left">
+<nav class="text-left" style="margin-right: 50px;">
+  <a routerLink="/user" routerLinkActive="active" style="margin-right: 20px;">Users </a>
+  <a routerLink="/team" style="margin-right: 20px;">Teams</a>
+  <a routerLink="/task" style="margin-right: 20px;">Tasks</a>
+</nav>
+<p class="text-left"><a [routerLink]="['/login']">Logout</a></p>
+</div>
+<router-outlet></router-outlet>
