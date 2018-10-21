@@ -9,6 +9,7 @@ public class TeamDto implements Serializable {
     private long capacity;
     private long leaderId;
     private String status;
+    private String leaderName;
 
     public long getId() {
         return id;
@@ -56,5 +57,13 @@ public class TeamDto implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLeaderName() {
+        return leaderName;
+    }
+
+    public void setLeaderName(String leaderName) {
+        this.leaderName = leaderName;
     }
 }

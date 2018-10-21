@@ -16,10 +16,13 @@ import { AlertService, AuthenticationService, UserService } from './_services';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
-import {UserComponent} from "./user/user.component";
-import {DxDataGridModule} from "devextreme-angular";
+import { UserComponent} from "./user/user.component";
+import { DxDataGridModule} from "devextreme-angular";
 import { TaskComponent } from './task/task.component';
 import { TeamComponent } from './team/team.component';
+import {PaginationConfig, PaginationModule} from 'ngx-bootstrap';
+// import {NgxPaginationModule} from "ngx-pagination";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -27,6 +30,8 @@ import { TeamComponent } from './team/team.component';
         ReactiveFormsModule,
         HttpClientModule,
         DxDataGridModule,
+        PaginationModule,
+        FormsModule,
         routing
     ],
   declarations: [
@@ -43,6 +48,7 @@ import { TeamComponent } from './team/team.component';
         AlertService,
         AuthenticationService,
         UserService,
+        PaginationConfig,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

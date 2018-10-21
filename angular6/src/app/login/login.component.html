@@ -1,5 +1,6 @@
-﻿<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+﻿<div style="margin-left: 360px;">
+<h2 style="margin-top: 100px;">Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="margin-top: 30px;">
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
@@ -20,3 +21,4 @@
         <!--<a [routerLink]="['/register']" class="btn btn-link">Register</a>-->
     </div>
 </form>
+</div>

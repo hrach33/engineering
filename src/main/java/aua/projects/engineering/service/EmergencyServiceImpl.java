@@ -1,8 +1,7 @@
 package aua.projects.engineering.service;
 
 import aua.projects.engineering.dao.EmergencyDao;
-import aua.projects.engineering.dto.TeamDto;
-import aua.projects.engineering.dto.UserDto;
+import aua.projects.engineering.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +29,26 @@ public class EmergencyServiceImpl implements EmergencyService {
 
     @Override
     public void updateUser(UserDto userDto) { emergencyDao.updateUser(userDto);}
+
+    @Override
+    public int getSearchCount(SearchFilter searchUsersFilter) {
+        return emergencyDao.getSearchCount(searchUsersFilter);
+    }
+
+    @Override
+    public List<UserDto> search(SearchFilter searchUsersFilter, PageInfo pageInfo, OrderInfoList orderInfoList) {
+        return emergencyDao.search(searchUsersFilter, pageInfo, orderInfoList);
+    }
+
+    @Override
+    public int getTeamSearchCount(SearchFilter searchFilter) {
+        return emergencyDao.getTeamSearchCount(searchFilter);
+    }
+
+    @Override
+    public List<TeamDto> searchTeam(SearchFilter searchFilter, PageInfo pageInfo, OrderInfoList orderInfoList) {
+        return emergencyDao.searchTeam(searchFilter, pageInfo, orderInfoList);
+    }
 
     @Override
     public List<TeamDto> getAllTeams() { return emergencyDao.getAllTeams();}

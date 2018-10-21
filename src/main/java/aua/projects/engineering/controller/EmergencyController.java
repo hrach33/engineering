@@ -1,8 +1,8 @@
 package aua.projects.engineering.controller;
 
 import aua.projects.engineering.beans.response.ResponseResult;
-import aua.projects.engineering.dto.UserDto;
-import aua.projects.engineering.dto.TeamDto;
+import aua.projects.engineering.beans.response.ResponseStatus;
+import aua.projects.engineering.dto.*;
 import aua.projects.engineering.service.EmergencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -119,5 +119,53 @@ public class EmergencyController {
         }
     }
 
+    private static class CountRequest {
+        public SearchFilter searchFilter;
+    }
 
+    @RequestMapping(value = "/countUsers", method = RequestMethod.POST)
+    public ResponseResult countUsers(@RequestBody CountRequest request) {
+        try {
+            return ResponseResult.ok(emergencyService.getSearchCount(request.searchFilter));
+        } catch (Throwable throwable) {
+            LOG.error("get count failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+    private static class SearchReportsRequest {
+        public SearchFilter searchFilter;
+        public PageInfo pageInfo;
+        public OrderInfoList orderInfoList;
+    }
+
+    @RequestMapping(value = "/searchUsers", method = RequestMethod.POST)
+    public ResponseResult countUsers(@RequestBody SearchReportsRequest searchReportsRequest) {
+        try {
+            return ResponseResult.ok(emergencyService.search(searchReportsRequest.searchFilter, searchReportsRequest.pageInfo, searchReportsRequest.orderInfoList));
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/countTeams", method = RequestMethod.POST)
+    public ResponseResult countTeams(@RequestBody CountRequest request) {
+        try {
+            return ResponseResult.ok(emergencyService.getTeamSearchCount(request.searchFilter));
+        } catch (Throwable throwable) {
+            LOG.error("get count failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/searchTeams", method = RequestMethod.POST)
+    public ResponseResult countTeams(@RequestBody SearchReportsRequest searchReportsRequest) {
+        try {
+            return ResponseResult.ok(emergencyService.searchTeam(searchReportsRequest.searchFilter, searchReportsRequest.pageInfo, searchReportsRequest.orderInfoList));
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
 }

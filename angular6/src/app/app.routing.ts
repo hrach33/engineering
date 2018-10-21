@@ -5,12 +5,14 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { AuthGuard } from './_guards';
 import {UserComponent} from "./user/user.component";
+import {TeamComponent} from "./team/team.component";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent,canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'user', pathMatch: 'full' },
-      { path: 'user', component: UserComponent }
+      { path: 'user', component: UserComponent },
+      { path: 'team', component: TeamComponent }
     ]
   },
     { path: 'login', component: LoginComponent },

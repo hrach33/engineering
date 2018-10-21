@@ -1,3 +1,58 @@
-<p>
-  team works!
-</p>
+
+
+<div id="seatchFilters" class="row " style="width: 1000px; margin-top: 30px;">
+  <div id="selectUsers" class="col-sm-2" style=" margin-bottom: 10px;">
+    <input type="text" [(ngModel)] = teamName name="userName" placeholder="Team name"/>
+
+  </div>
+  <div id="speciality" class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = speciality name="speciality" placeholder="Speciality"/>
+  </div>
+  <div id="statusFilter" class="col-sm-2" style=" margin-bottom: 10px;">
+    <select id="statusFilterSelect" class="form-control" [(ngModel)]="status" style="margin-left: 10px; width: 170px;">
+      <option value="" [selected]=true></option>
+      <option value="active" >active</option>
+      <option value="inactive" >inactive</option>
+      <option value="deleted" >deleted</option>
+    </select>
+  </div>
+  <div id="buttonsID" class="col-sm-3" style="margin-left: 20px;">
+    <button id="searchID" class="btn btn-dark" (click)="search()">Search</button>
+
+  </div>
+</div>
+<dx-data-grid style="width: 1000px;"
+              id="reports"
+              [dataSource]="teams"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [allowColumnResizing]="true"
+              [hoverStateEnabled]="true"
+              [allowColumnReordering]="true"
+              [columnResizingMode]="'nextColumn'"
+              [columnMinWidth]="50"
+              [wordWrapEnabled]="false">
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxi-column dataField="name" caption="Team name"></dxi-column>
+  <dxi-column dataField="speciality" caption="Speciality"></dxi-column>
+  <dxi-column dataField="capacity" caption="Capacity"></dxi-column>
+  <dxi-column dataField="leaderName" caption="Leader name"></dxi-column>
+  <dxi-column dataField="status" caption="Status"></dxi-column>
+</dx-data-grid>
+<div id="paginationMainContainer" class="row">
+  <div id="paginationInnerContainer" class="col-md-offset-5" style="margin-top: 20px; margin-left: 360px;">
+    <pagination  [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                 lastText="&raquo;"
+                 [totalItems]="count"
+                 (pageChanged)="onPageChange($event)"
+                 [maxSize]=5
+                 [itemsPerPage]="itemsPerPage"
+                 [(ngModel)]="pageIndex"
+
+    >
+
+    </pagination>
+
+  </div>
+</div>

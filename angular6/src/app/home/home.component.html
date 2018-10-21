@@ -1,10 +1,10 @@
-﻿<p>Current user: {{currentUser.username}}</p>
-<div class="text-left">
-<nav class="text-left" style="margin-right: 50px;">
-  <a routerLink="/user" routerLinkActive="active" style="margin-right: 20px;">Users </a>
-  <a routerLink="/team" style="margin-right: 20px;">Teams</a>
-  <a routerLink="/task" style="margin-right: 20px;">Tasks</a>
-</nav>
-<p class="text-left"><a [routerLink]="['/login']">Logout</a></p>
+﻿<div class="row text-left" style=" margin-top: 20px;">
+  <nav class="text-left" style="margin-right: 50px;">
+    <a routerLink="/user" routerLinkActive="active" style="margin-right: 20px;">Users </a>
+    <a routerLink="/team" style="margin-right: 20px;">Teams</a>
+    <a routerLink="/task" style="margin-right: 20px;">Tasks</a>
+  </nav>
+  <p style="margin-left: 350px;">Current user: {{currentUser.username}}</p>
+  <p class="text-left" style="margin-left: 30px;"><a [routerLink]="['/login']">Logout</a></p>
 </div>
 <router-outlet></router-outlet>

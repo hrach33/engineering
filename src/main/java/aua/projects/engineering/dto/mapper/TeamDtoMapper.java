@@ -32,8 +32,11 @@ public class TeamDtoMapper implements RowMapper<TeamDto> {
                 case "leader_id":
                     entity.setLeaderId(resultSet.getLong(col));
                     break;
-                case "status":
+                case "team_status":
                     entity.setStatus(resultSet.getString(col));
+                    break;
+                case "user_name":
+                    entity.setLeaderName(resultSet.getString(col));
                     break;
             }
 

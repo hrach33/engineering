@@ -1,7 +1,6 @@
 package aua.projects.engineering.service;
 
-import aua.projects.engineering.dto.TeamDto;
-import aua.projects.engineering.dto.UserDto;
+import aua.projects.engineering.dto.*;
 
 import java.util.List;
 
@@ -11,7 +10,10 @@ public interface EmergencyService {
     UserDto getUserByUsername(String username);
     void insertUser(UserDto userDto);
     void updateUser(UserDto userDto);
-
+    int getSearchCount(SearchFilter searchUsersFilter);
+    List<UserDto> search(SearchFilter searchUsersFilter, PageInfo pageInfo, OrderInfoList orderInfoList);
+    int getTeamSearchCount(SearchFilter searchFilter);
+    List<TeamDto> searchTeam(SearchFilter searchFilter, PageInfo pageInfo, OrderInfoList orderInfoList);
     List<TeamDto> getAllTeams();
     TeamDto getTeamById(long id);
     void insertTeam(TeamDto teamDto);
