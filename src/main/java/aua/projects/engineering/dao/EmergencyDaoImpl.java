@@ -3,6 +3,7 @@ package aua.projects.engineering.dao;
 import aua.projects.engineering.dto.TeamDto;
 import aua.projects.engineering.dto.UserDto;
 import aua.projects.engineering.dto.mapper.UserDtoMapper;
+import aua.projects.engineering.dto.mapper.TeamDtoMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,16 @@ public class EmergencyDaoImpl extends BaseDao implements EmergencyDao {
         }
     }
 
+    private static final String GET_USER_BY_USERNAME = "select * from user where userName = ? ";
+    @Override
+    public UserDto getUserByUsername(String username) {
+        try {
+            return this.getJdbcTemplate().queryForObject(GET_USER_BY_USERNAME, new Object[]{username}, new UserDtoMapper());
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
     private static final String INSERT_USER = "insert into user " +
             "(user_name, first_name, last_name, password, speciality, birth_date, gender, status) " +
             " VALUES (?,?,?,?,?,?,?,?)";
@@ -43,28 +54,65 @@ public class EmergencyDaoImpl extends BaseDao implements EmergencyDao {
                 userDto.getStatus()});
     }
 
+    private static final String UPDATE_USER = "update user set" +
+            "(user_name, first_name, last_name, speciality, birth_date, gender, status) " +
+            " VALUES (?,?,?,?,?,?,?) where id = ? ";
     @Override
     public void updateUser(UserDto userDto) {
-
+        this.getJdbcTemplate().update(UPDATE_USER, new Object[]{userDto.getUserName(),
+                userDto.getFirstName(),
+                userDto.getLastName(),
+                userDto.getSpeciality(),
+                userDto.getBirthDate(),
+                userDto.getGender(),
+                userDto.getStatus(),
+                userDto.getId()});
     }
 
+
+    private static final String GET_ALL_TEAMS = "select * from team";
     @Override
     public List<TeamDto> getAllTeams() {
-        return null;
+        return this.getJdbcTemplate().query(GET_ALL_TEAMS, new TeamDtoMapper());
     }
 
+
+
+    private static final String GET_TEAM_BY_ID = "select * from team where id = ? ";
     @Override
     public TeamDto getTeamById(long id) {
-        return null;
+        try {
+            return this.getJdbcTemplate().queryForObject(GET_TEAM_BY_ID, new Object[]{id}, new TeamDtoMapper());
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
+
+    private static final String INSERT_TEAM = "insert into team "+
+            "(name, speciality, capacity, leaderId, status)" +
+            " VALUES (?,?,?,?,?)";
     @Override
     public void insertTeam(TeamDto teamDto) {
-
+        this.getJdbcTemplate().update(INSERT_TEAM, new Object[]{teamDto.getName(),
+        teamDto.getSpeciality(),
+        teamDto.getCapacity(),
+        teamDto.getLeaderId(),
+        teamDto.getStatus()});
     }
 
+
+    private static final String UPDATE_TEAM = "update team set" +
+            "(name, speciality, capacity, leaderId, status) " +
+            " VALUES (?,?,?,?,?) where id = ? ";
     @Override
     public void updateTeam(TeamDto teamDto) {
-
+        this.getJdbcTemplate().update(UPDATE_TEAM, new Object[]{teamDto.getName(),
+                teamDto.getSpeciality(),
+                teamDto.getCapacity(),
+                teamDto.getLeaderId(),
+                teamDto.getStatus()});
     }
+
+
 }

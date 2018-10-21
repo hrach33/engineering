@@ -8,6 +8,7 @@ import java.util.List;
 public interface EmergencyDao {
     List<UserDto> getAllUsers();
     UserDto getUserById(long id);
+    UserDto getUserByUsername(String username);
     void insertUser(UserDto userDto);
     void updateUser(UserDto userDto);
 

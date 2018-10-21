@@ -15,42 +15,35 @@ public class EmergencyServiceImpl implements EmergencyService {
     private EmergencyDao emergencyDao;
 
     @Override
-    public List<UserDto> getAllUsers() {
-        return emergencyDao.getAllUsers();
+    public List<UserDto> getAllUsers() { return emergencyDao.getAllUsers();}
+
+    @Override
+    public UserDto getUserById(long id) { return emergencyDao.getUserById(id); }
+
+    @Override
+    public UserDto getUserByUsername(String username) {
+        return emergencyDao.getUserByUsername(username);
     }
 
     @Override
-    public UserDto getUserById(long id) {
-        return emergencyDao.getUserById(id);
-    }
+    public void insertUser(UserDto userDto) { emergencyDao.insertUser(userDto);}
 
     @Override
-    public void insertUser(UserDto userDto) {
-        emergencyDao.insertUser(userDto);
-    }
+    public void updateUser(UserDto userDto) { emergencyDao.updateUser(userDto);}
 
     @Override
-    public void updateUser(UserDto userDto) {
-
-    }
+    public List<TeamDto> getAllTeams() { return emergencyDao.getAllTeams();}
 
     @Override
-    public List<TeamDto> getAllTeams() {
-        return null;
-    }
+    public TeamDto getTeamById(long id) { return emergencyDao.getTeamById(id);}
 
     @Override
-    public TeamDto getTeamById(long id) {
-        return null;
-    }
+    public void insertTeam(TeamDto teamDto) { emergencyDao.insertTeam(teamDto); }
 
     @Override
-    public void insertTeam(TeamDto teamDto) {
-
-    }
+    public void updateTeam(TeamDto teamDto) { emergencyDao.updateTeam(teamDto);}
 
     @Override
-    public void updateTeam(TeamDto teamDto) {
+    public boolean checkUsernameTaken(String username) { return getUserByUsername(username) != null;}
 
-    }
 }
