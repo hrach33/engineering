@@ -65,8 +65,7 @@ public class AuthProvider {
     }
 
     public boolean checkUserCredentials(String username, String password){
-//        UserDto userDto = emergencyService.getUserByUserName(username);
-        UserDto userDto = null;
+        UserDto userDto = emergencyService.getUserByUsername(username);
         if(userDto != null){
             return passwordEncoder.matches(password, userDto.getPassword());
         }
