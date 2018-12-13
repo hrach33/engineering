@@ -33,16 +33,16 @@ public class AppConfig {
 //        registration.setOrder(0);
 //        return registration;
 //    }
-    @Bean
-    public FilterRegistrationBean<AuthFilter> authFilter(){
-        FilterRegistrationBean<AuthFilter> registrationBean
-                = new FilterRegistrationBean<>();
-
-        registrationBean.setFilter(new AuthFilter(authProvider));
-        registrationBean.addUrlPatterns("/emergency/*");
-
-        return registrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean<AuthFilter> authFilter(){
+//        FilterRegistrationBean<AuthFilter> registrationBean
+//                = new FilterRegistrationBean<>();
+//
+//        registrationBean.setFilter(new AuthFilter(authProvider));
+//        registrationBean.addUrlPatterns("/emergency/*");
+//
+//        return registrationBean;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -60,7 +60,8 @@ public class AuthProvider {
     public String createToken(String username){
         try {
             Algorithm algorithm = Algorithm.HMAC256(key);
-            String token = JWT.create().withClaim("userName", username).withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
+            String token = JWT.create().withClaim("userName", username)
+                    .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime))
                     .withIssuer("auth0")
                     .sign(algorithm);
             return token;
@@ -79,7 +80,6 @@ public class AuthProvider {
     }
 
     public String hashPassword(String password){
-
         return passwordEncoder.encode(password);
     }
 }

@@ -163,7 +163,8 @@ public class EmergencyDaoImpl extends BaseDao implements EmergencyDao {
                 teamDto.getLeaderId(),
                 teamDto.getStatus()});
     }
-    private void generateQuery(StringBuffer query, SearchFilter searchUsersFilter, PageInfo page, OrderInfoList order, List<Object> filterValues) {
+    private void generateQuery(StringBuffer query, SearchFilter searchUsersFilter, PageInfo page, OrderInfoList order,
+                               List<Object> filterValues) {
         if (searchUsersFilter != null) {
 
             if (searchUsersFilter.getSearchParams() != null && searchUsersFilter.getSearchParams().size() != 0) {

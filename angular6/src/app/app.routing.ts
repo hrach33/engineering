@@ -8,7 +8,7 @@ import {UserComponent} from "./user/user.component";
 import {TeamComponent} from "./team/team.component";
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent,canActivate: [AuthGuard],
+  { path: '', component: HomeComponent,
     children: [
       { path: '', redirectTo: 'user', pathMatch: 'full' },
       { path: 'user', component: UserComponent },

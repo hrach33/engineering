@@ -20,7 +20,10 @@ export class UserComponent implements OnInit {
     this.search();
   }
   search(){
-    let params = {user_name: this.username, speciality: this.speciality, status: this.status == 'Status' ? null : this.status}
+    let params = {
+      user_name: this.username,
+      speciality: this.speciality,
+      status: this.status == 'Status' ? null : this.status}
 
     this.userManagement.count(params).subscribe( res => {
       this.count = res.data;

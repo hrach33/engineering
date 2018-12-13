@@ -1,11 +1,11 @@
 {
   "/auth/*": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:9001",
     "secure": false,
     "logLevel": "debug"
   },
   "/emergency/*": {
-    "target": "http://localhost:8080",
+    "target": "http://localhost:9001",
     "secure": false,
     "logLevel": "debug"
   }
