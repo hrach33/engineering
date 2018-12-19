@@ -8,7 +8,10 @@ public class TaskDto implements Serializable {
     private String destination;
     private String description;
     private String status;
+    private String state;
     private int level;
+    private long teamId;
+    private String teamName;
 
     public long getId() {
         return id;
@@ -56,5 +59,29 @@ public class TaskDto implements Serializable {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(long teamId) {
+        this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 }

@@ -15,4 +15,13 @@ export class TeamManagementService {
     return this.http.post<any>('/emergency/searchTeams', {searchFilter: {searchParams: params}, pageInfo:pageInfo, orderInfoList: orderInfo});
 
   }
+
+  update(team){
+    return this.http.post<any>('/emergency/insertOrUpdateTeam', team);
+
+  }
+
+  deleteTeam(id){
+    return this.http.get<any>('emergency/deleteTeam/' + id);
+  }
 }

@@ -1,6 +1,7 @@
 package aua.projects.engineering.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class TeamDto implements Serializable {
     private long id;
@@ -10,6 +11,7 @@ public class TeamDto implements Serializable {
     private long leaderId;
     private String status;
     private String leaderName;
+    private List<UserDto> users;
 
     public long getId() {
         return id;
@@ -65,5 +67,13 @@ public class TeamDto implements Serializable {
 
     public void setLeaderName(String leaderName) {
         this.leaderName = leaderName;
+    }
+
+    public List<UserDto> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserDto> users) {
+        this.users = users;
     }
 }

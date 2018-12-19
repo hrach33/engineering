@@ -42,6 +42,17 @@ public class EmergencyController {
         }
     }
 
+    @GetMapping("/deleteUser/{id}")
+    ResponseResult deleteUser(@PathVariable("id") Long id){
+        try {
+            emergencyService.deleteUser(id);
+            return ResponseResult.ok();
+        }catch (Throwable t){
+            LOG.error("Get user by id failed. ", t);
+            return ResponseResult.error();
+        }
+    }
+
     @GetMapping("/getUserByUsername/{username}")
     ResponseResult getUserByUsername(@PathVariable("username") String username){
         try {
@@ -53,7 +64,7 @@ public class EmergencyController {
         }
     }
 
-    @PostMapping("/insertUser")
+    @PostMapping("/insertOrUpdateUser")
     ResponseResult inserUser(@RequestBody UserDto userDto){
         try {
             emergencyService.insertUser(userDto);
@@ -97,8 +108,8 @@ public class EmergencyController {
         }
     }
 
-    @PostMapping("/insertTeam")
-    ResponseResult inserTeam(@RequestBody TeamDto teamDto){
+    @PostMapping("/insertOrUpdateTeam")
+    ResponseResult insertOrUpdateTeam(@RequestBody TeamDto teamDto){
         try {
             emergencyService.insertTeam(teamDto);
             return ResponseResult.ok();
@@ -118,7 +129,16 @@ public class EmergencyController {
             return ResponseResult.error();
         }
     }
-
+    @GetMapping("/deleteTeam/{id}")
+    ResponseResult deleteTeam(@PathVariable("id") Long id){
+        try {
+            emergencyService.deleteTeam(id);
+            return ResponseResult.ok();
+        }catch (Throwable t){
+            LOG.error("Get user by id failed. ", t);
+            return ResponseResult.error();
+        }
+    }
     private static class CountRequest {
         public SearchFilter searchFilter;
     }
@@ -168,4 +188,89 @@ public class EmergencyController {
             return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
         }
     }
+
+
+    @RequestMapping(value = "/getTasksByTeamId/{id}", method = RequestMethod.GET)
+    public ResponseResult getTasksByTeamId(@PathVariable("id") Long id) {
+        try {
+            return ResponseResult.ok(emergencyService.getTasksByTEamID(id));
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+    private static class takeTaskRequest {
+        public long id;
+    }
+    @RequestMapping(value = "/takeTask", method = RequestMethod.POST)
+    public ResponseResult takeTask(@RequestBody takeTaskRequest takeTaskRequest) {
+        try {
+            emergencyService.takeTask(takeTaskRequest.id);
+            return ResponseResult.ok();
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+    private static class finishTaskRequest {
+        public long id;
+        public String status;
+    }
+    @RequestMapping(value = "/finishTask", method = RequestMethod.POST)
+    public ResponseResult finishTask(@RequestBody finishTaskRequest finishTaskRequest) {
+        try {
+            emergencyService.finishTask(finishTaskRequest.id, finishTaskRequest.status);
+            return ResponseResult.ok();
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/getUsersByTeamId/{id}", method = RequestMethod.GET)
+    public ResponseResult getUsersByTeamId(@PathVariable("id") Long id) {
+        try {
+            return ResponseResult.ok(emergencyService.getUsersByTeamId(id));
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+
+    @RequestMapping(value = "/countTasks", method = RequestMethod.GET)
+    public ResponseResult countTasks() {
+        try {
+            return ResponseResult.ok(emergencyService.getTaskCount());
+        } catch (Throwable throwable) {
+            LOG.error("get count failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/searchTasks", method = RequestMethod.POST)
+    public ResponseResult searchTasks(@RequestBody SearchReportsRequest searchReportsRequest) {
+        try {
+            return ResponseResult.ok(emergencyService.searchTasks(searchReportsRequest.pageInfo));
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+
+    @RequestMapping(value = "/addTask", method = RequestMethod.POST)
+    public ResponseResult addTask(@RequestBody TaskDto taskDto) {
+        try {
+            emergencyService.addTask(taskDto);
+            return ResponseResult.ok();
+        } catch (Throwable throwable) {
+            LOG.error("search failed ", throwable);
+            return ResponseResult.error(ResponseStatus.GENERAL_ERROR);
+        }
+    }
+
+
 }

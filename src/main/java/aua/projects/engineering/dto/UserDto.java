@@ -10,7 +10,7 @@ public class UserDto implements Serializable {
     private String lastName;
     private String password;
     private String speciality;
-    private Timestamp birthDate;
+    private String birthDate;
     private String gender;
     private String status;
 
@@ -62,11 +62,11 @@ public class UserDto implements Serializable {
         this.speciality = speciality;
     }
 
-    public Timestamp getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Timestamp birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

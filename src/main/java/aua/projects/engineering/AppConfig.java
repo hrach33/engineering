@@ -19,30 +19,30 @@ public class AppConfig {
 
     @Autowired
     AuthProvider authProvider;
-//    @Bean
-//    public FilterRegistrationBean someFilterRegistration() {
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        CorsConfiguration config = new CorsConfiguration();
-//        config.setAllowCredentials(true);
-//        config.addAllowedOrigin("*");
-//        config.addAllowedHeader("*");
-//        config.addAllowedMethod("*");
-//        source.registerCorsConfiguration("/**", config);
-//
-//        FilterRegistrationBean registration = new FilterRegistrationBean(new CorsFilter(source));
-//        registration.setOrder(0);
-//        return registration;
-//    }
-//    @Bean
-//    public FilterRegistrationBean<AuthFilter> authFilter(){
-//        FilterRegistrationBean<AuthFilter> registrationBean
-//                = new FilterRegistrationBean<>();
-//
-//        registrationBean.setFilter(new AuthFilter(authProvider));
-//        registrationBean.addUrlPatterns("/emergency/*");
-//
-//        return registrationBean;
-//    }
+    @Bean
+    public FilterRegistrationBean someFilterRegistration() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+
+        FilterRegistrationBean registration = new FilterRegistrationBean(new CorsFilter(source));
+        registration.setOrder(0);
+        return registration;
+    }
+    @Bean
+    public FilterRegistrationBean<AuthFilter> authFilter(){
+        FilterRegistrationBean<AuthFilter> registrationBean
+                = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new AuthFilter(authProvider));
+        registrationBean.addUrlPatterns("/emergency/*");
+
+        return registrationBean;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

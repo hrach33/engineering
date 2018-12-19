@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UserManagementService} from "../_services/user-management.service";
 
 @Component({
@@ -15,10 +15,25 @@ export class UserComponent implements OnInit {
   username;
   speciality;
   status;
+
+  formOpened = false;
+  editDisabled = true;
+  form = {
+    id:0,
+    userName: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    speciality: '',
+    birthDate: '',
+    gender: '',
+    status: ''
+  }
   constructor(private userManagement: UserManagementService) { }
   ngOnInit() {
     this.search();
   }
+  @ViewChild('userGrid') userGridRef: ElementRef;
   search(){
     let params = {
       user_name: this.username,
@@ -43,4 +58,59 @@ export class UserComponent implements OnInit {
   onPageChange(event){
     this.search();
   }
+
+  rowClicked(event){
+    this.form = event.data;
+    this.editDisabled = false;
+  }
+
+  create() {
+    this.form = {
+      id:0,
+      userName: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      speciality: '',
+      birthDate: '',
+      gender: '',
+      status: ''
+    }
+    this.formOpened = true;
+  }
+
+  edit() {
+    this.formOpened = true;
+    this.form.password = null;
+  }
+
+  delete(){
+      this.userManagement.deleteUser(this.form.id).subscribe( res => {
+        this.search();
+      }, err => {
+        console.log(err);
+      })
+  }
+
+  save() {
+    this.userManagement.updateUser(this.form).subscribe(res => {
+      this.form = {
+        id:0,
+        userName: '',
+        firstName: '',
+        lastName: '',
+        password: '',
+        speciality: '',
+        birthDate: '',
+        gender: '',
+        status: ''
+      }
+      this.formOpened = false;
+      this.search();
+    }, err => {
+      console.log(err);
+    })
+  }
+
+
 }

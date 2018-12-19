@@ -15,9 +15,9 @@ export class AuthenticationService {
             .pipe(map(res => {
                 // login successful if there's a jwt token in the response
                 if (res && res.data) {
-                  let decoded = this.helper.decodeToken(res.data);
+                  let decoded = this.helper.decodeToken(res.data.jwt);
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({username: decoded.userName, token:res.data}));
+                    localStorage.setItem('currentUser', JSON.stringify({username: decoded.userName, token:res.data.jwt}));
                 }
 
                 return res;

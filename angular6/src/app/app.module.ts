@@ -23,6 +23,7 @@ import { TeamComponent } from './team/team.component';
 import {PaginationConfig, PaginationModule} from 'ngx-bootstrap';
 // import {NgxPaginationModule} from "ngx-pagination";
 import { FormsModule } from '@angular/forms';
+import {AngularMultiSelectModule} from "angular2-multiselect-dropdown";
 
 @NgModule({
     imports: [
@@ -32,6 +33,7 @@ import { FormsModule } from '@angular/forms';
         DxDataGridModule,
         PaginationModule,
         FormsModule,
+      AngularMultiSelectModule,
         routing
     ],
   declarations: [

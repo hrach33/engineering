@@ -1,3 +1,82 @@
-<p>
-  task works!
-</p>
+
+
+<dx-data-grid style="width: 1000px; margin-top: 20px;"
+              #userGrid
+              id="reports"
+              keyExpr="id"
+              [dataSource]="tasks"
+              [showColumnLines]="true"
+              [showRowLines]="true"
+              [showBorders]="true"
+              [allowColumnResizing]="true"
+              [hoverStateEnabled]="true"
+              [allowColumnReordering]="true"
+              [columnResizingMode]="'nextColumn'"
+              [columnMinWidth]="50"
+              [wordWrapEnabled]="false"
+              [selectedRowKeys]="[]"
+              (onRowClick)="rowClicked($event)"
+>
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxo-selection mode="single"></dxo-selection>
+  <dxi-column dataField="type" caption="Type"></dxi-column>
+  <dxi-column dataField="destination" caption="Destination"></dxi-column>
+  <dxi-column dataField="description" caption="Description"></dxi-column>
+  <dxi-column dataField="teamName" caption="Team"></dxi-column>
+  <dxi-column dataField="level" caption="Level"></dxi-column>
+  <dxi-column dataField="state" caption="State"></dxi-column>
+  <dxi-column dataField="status" caption="Status"></dxi-column>
+</dx-data-grid>
+
+<div id="paginationMainContainer" class="row">
+  <div id="paginationInnerContainer" class="col-md-offset-5" style="margin-top: 20px; margin-left: 360px;">
+    <pagination  [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                 lastText="&raquo;"
+                 [totalItems]="count"
+                 (pageChanged)="onPageChange($event)"
+                 [maxSize]=5
+                 [itemsPerPage]="itemsPerPage"
+                 [(ngModel)]="pageIndex"
+
+    >
+
+    </pagination>
+
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+  <div  class="col-sm-1" style="margin-left: 20px;">
+    <button class="btn btn-success" (click)="create()" >Add new task</button>
+
+  </div>
+
+</div>
+
+<div class="row" style="margin-top: 20px;" *ngIf="formOpened">
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <input type="text" [(ngModel)] = form.type name="" placeholder="Type"/>
+
+  </div>
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = form.destination name="" placeholder="Destination"/>
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = form.description name="" placeholder="Description"/>
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <select  class="form-control" [(ngModel)]="form.teamId" style="margin-left: 10px; width: 170px;">
+      <option value="" *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+    </select>
+  </div>
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="number" [(ngModel)] = form.level name="" placeholder="Level"/>
+  </div>
+
+  <div  class="col-sm-3" style="margin-left: 20px;">
+    <button class="btn btn-dark" (click)="save()">Save</button>
+
+  </div>
+</div>

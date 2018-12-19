@@ -22,4 +22,12 @@ export class UserManagementService {
 
   }
 
+  updateUser(user){
+    return this.http.post<any>('/emergency/insertOrUpdateUser', user);
+
+  }
+
+  deleteUser(id) {
+    return this.http.get<any>('/emergency/deleteUser/' + id);
+  }
 }

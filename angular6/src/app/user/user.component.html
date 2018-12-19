@@ -22,7 +22,9 @@
   </div>
 </div>
 <dx-data-grid style="width: 1000px;"
+              #userGrid
   id="reports"
+              keyExpr="id"
   [dataSource]="users"
   [showColumnLines]="true"
   [showRowLines]="true"
@@ -32,16 +34,21 @@
   [allowColumnReordering]="true"
   [columnResizingMode]="'nextColumn'"
   [columnMinWidth]="50"
-  [wordWrapEnabled]="false">
+  [wordWrapEnabled]="false"
+              [selectedRowKeys]="[]"
+  (onRowClick)="rowClicked($event)"
+>
   <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxo-selection mode="single"></dxo-selection>
   <dxi-column dataField="userName" caption="Username"></dxi-column>
   <dxi-column dataField="firstName" caption="First name"></dxi-column>
   <dxi-column dataField="lastName" caption="Last name"></dxi-column>
   <dxi-column dataField="speciality" caption="Speciality"></dxi-column>
-  <dxi-column dataField="birthDate" caption="Birth Date" dataType="date" format='dd/MM/yyyy HH:mm:ss'></dxi-column>
+  <dxi-column dataField="birthDate" caption="Birth Date"></dxi-column>
   <dxi-column dataField="gender" caption="Gender"></dxi-column>
   <dxi-column dataField="status" caption="Status"></dxi-column>
 </dx-data-grid>
+
 <div id="paginationMainContainer" class="row">
   <div id="paginationInnerContainer" class="col-md-offset-5" style="margin-top: 20px; margin-left: 360px;">
     <pagination  [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
@@ -55,6 +62,68 @@
     >
 
     </pagination>
+
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+  <div  class="col-sm-1" style="margin-left: 20px;">
+    <button class="btn btn-success" (click)="create()" >Create</button>
+
+  </div>
+  <div  class="col-sm-1" style="margin-left: 20px;">
+    <button class="btn btn-warning" (click)="edit()" [disabled]="editDisabled">Edit</button>
+
+  </div>
+  <div  class="col-sm-1" style="margin-left: 20px;">
+    <button class="btn btn-danger" (click)="delete()" [disabled]="editDisabled">Delete</button>
+
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px;" *ngIf="formOpened">
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <input type="text" [(ngModel)] = form.userName name="userName" placeholder="Username"/>
+
+  </div>
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = form.firstName name="" placeholder="First name"/>
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = form.lastName name="" placeholder="Last name"/>
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="password" [(ngModel)] = form.password name="" placeholder="Password"/>
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = form.speciality name="" placeholder="Speciality"/>
+  </div>
+
+
+
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = form.birthDate  placeholder="Birth date"/>
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px; margin-left: 10px; width: 13%">
+    <input type="text" [(ngModel)] = form.gender  placeholder="Gender"/>
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <select  class="form-control" [(ngModel)]="form.status" style="margin-left: 10px; width: 170px;">
+      <option value="" [selected]=true></option>
+      <option value="active" >active</option>
+      <option value="inactive" >inactive</option>
+      <option value="deleted" >deleted</option>
+    </select>
+  </div>
+
+  <div  class="col-sm-3" style="margin-left: 20px;">
+    <button class="btn btn-dark" (click)="save()">Save</button>
 
   </div>
 </div>

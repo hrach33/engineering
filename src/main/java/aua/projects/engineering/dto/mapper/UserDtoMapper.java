@@ -35,7 +35,7 @@ public class UserDtoMapper implements RowMapper<UserDto> {
                     entity.setSpeciality(resultSet.getString(col));
                     break;
                 case "birth_date":
-                    entity.setBirthDate(resultSet.getTimestamp(col));
+                    entity.setBirthDate(resultSet.getString(col));
                     break;
                 case "gender":
                     entity.setGender(resultSet.getString(col));

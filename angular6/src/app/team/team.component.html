@@ -32,12 +32,15 @@
               [allowColumnReordering]="true"
               [columnResizingMode]="'nextColumn'"
               [columnMinWidth]="50"
-              [wordWrapEnabled]="false">
+              [wordWrapEnabled]="false"
+              [selectedRowKeys]="[]"
+              (onRowClick)="rowClicked($event)">
   <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <dxo-selection mode="single"></dxo-selection>
   <dxi-column dataField="name" caption="Team name"></dxi-column>
   <dxi-column dataField="speciality" caption="Speciality"></dxi-column>
   <dxi-column dataField="capacity" caption="Capacity"></dxi-column>
-  <dxi-column dataField="leaderName" caption="Leader name"></dxi-column>
+  <dxi-column dataField="users" caption="Users" [calculateCellValue]="calculateCellValue"></dxi-column>
   <dxi-column dataField="status" caption="Status"></dxi-column>
 </dx-data-grid>
 <div id="paginationMainContainer" class="row">
@@ -53,6 +56,60 @@
     >
 
     </pagination>
+
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+  <div  class="col-sm-1" style="margin-left: 20px;">
+    <button class="btn btn-success" (click)="create()" >Create</button>
+
+  </div>
+  <div  class="col-sm-1" style="margin-left: 20px;">
+    <button class="btn btn-warning" (click)="edit()" [disabled]="editDisabled">Edit</button>
+
+  </div>
+  <div  class="col-sm-1" style="margin-left: 20px;">
+    <button class="btn btn-danger" (click)="delete()" [disabled]="editDisabled">Delete</button>
+
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px;" *ngIf="formOpened">
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <input type="text" [(ngModel)] = form.name name="userName" placeholder="Name"/>
+
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <input type="text" [(ngModel)] = form.speciality name="" placeholder="Speciality"/>
+
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <input type="number" [(ngModel)] = form.capacity name="" placeholder="Capacity"/>
+
+  </div>
+
+  <div  class="col-sm-2" style=" margin-bottom: 10px;">
+    <select  class="form-control" [(ngModel)]="form.status" style="margin-left: 10px; width: 170px;">
+      <option value="" [selected]=true></option>
+      <option value="active" >active</option>
+      <option value="inactive" >inactive</option>
+      <option value="deleted" >deleted</option>
+    </select>
+  </div>
+
+  <angular2-multiselect [data]="dropdownList" [(ngModel)]="form.users"
+                        [settings]="dropdownSettings"
+                        (onSelect)="onItemSelect($event)"
+                        (onDeSelect)="OnItemDeSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                        (onDeSelectAll)="onDeSelectAll($event)"
+                        style="width: 150px;"></angular2-multiselect>
+
+  <div  class="col-sm-3" style="margin-left: 20px;">
+    <button class="btn btn-dark" (click)="save()">Save</button>
 
   </div>
 </div>
